@@ -53,11 +53,22 @@ function ResourceView({ schedulerData, contentScrollbarHeight, slotClickedFunc, 
       }
     }
 
-    const tdStyle = {
+    let tdStyle = {
       height: item.rowHeight,
       backgroundColor: item.groupOnly ? schedulerData.config.groupOnlySlotColor : undefined,
+      ...item.style, // Mescla o estilo personalizado, dando preferência ao que foi passado
     };
+    
+    if(item.nonWorkingTimeSlot){
+      tdStyle = {
+        height: item.rowHeight,
+        backgroundColor:  schedulerData.config.nonWorkingTimeBodyBgColor,
+        ...item.style,
+      };
+    }
 
+ 
+    
     return (
       <tr key={item.slotId}>
         <td data-resource-id={item.slotId} style={tdStyle}>

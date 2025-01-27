@@ -353,12 +353,18 @@ class ResourceEvents extends Component {
       }
     });
 
+    let  eventContainerStyle = {
+      height: resourceEvents.rowHeight,
+      ...resourceEvents.style,
+    };
+      
     const eventContainer = (
-      <div ref={this.eventContainerRef} className="event-container" style={{ height: resourceEvents.rowHeight }}>
+      <div ref={this.eventContainerRef} className="event-container" style={eventContainerStyle}>
         {selectedArea}
         {eventList}
       </div>
     );
+    
     return (
       <tr>
         <td style={{ width: rowWidth }}>{config.dragAndDropEnabled ? connectDropTarget(eventContainer) : eventContainer}</td>

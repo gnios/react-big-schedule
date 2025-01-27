@@ -8,7 +8,7 @@ function BodyView({ schedulerData }) {
 
   const tableRows = renderData
     .filter(o => o.render)
-    .map(({ slotId, groupOnly, rowHeight }) => {
+    .map(({ slotId, groupOnly, rowHeight, nonWorkingTimeSlot }) => {
       const rowCells = headers.map((header, index) => {
         const key = `${slotId}_${header.time}`;
         const style = index === headers.length - 1 ? {} : { width };
@@ -17,6 +17,9 @@ function BodyView({ schedulerData }) {
         }
         if (groupOnly) {
           style.backgroundColor = config.groupOnlySlotColor;
+        }
+        if (nonWorkingTimeSlot) {
+          style.backgroundColor = config.nonWorkingTimeBodyBgColor;
         }
         if (behaviors.getNonAgendaViewBodyCellBgColorFunc) {
           const cellBgColor = behaviors.getNonAgendaViewBodyCellBgColorFunc(schedulerData, slotId, header);
